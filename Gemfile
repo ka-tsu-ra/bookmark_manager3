@@ -8,6 +8,7 @@ ruby '2.2.2'
   gem 'dm-postgres-adapter'
   gem 'bcrypt'
   gem 'dm-validations'
+  gem 'sinatra-flash'
 
 group :test do
 
