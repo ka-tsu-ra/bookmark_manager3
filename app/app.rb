@@ -4,9 +4,6 @@ require 'sinatra/base'
 
 class BookmarkManager < Sinatra::Base
 
-  enable :sessions
-  set :sessions_secret, 'super secret'
-
   get '/' do
     redirect '/links'
   end
@@ -48,9 +45,4 @@ class BookmarkManager < Sinatra::Base
     erb :'users/new'
   end
 
-  post '/users' do
-    User.create(email: params[:email], password: params[:password])
-    session[:user_id] = user.id
-    redirect to('/')
-  end
 end
