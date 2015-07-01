@@ -4,6 +4,7 @@ env = ENV['RACK_ENV'] || 'development'
 
 require 'data_mapper' # get datamapper gem
 require 'dm-postgres-adapter'
+require 'dm-validations'
 
 # DataMapper.setup(:default, "postgres://localhost/bookmark_manager") # tells DataMapper where the databse is on your machine
 

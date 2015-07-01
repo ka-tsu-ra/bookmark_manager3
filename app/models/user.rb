@@ -23,6 +23,7 @@ class User
   property :password_digest, Text
 
   def password=(password)
+    @password = password  # without this the password attribute would always be nil.
     self.password_digest = BCrypt::Password.create(password)
   end
 
