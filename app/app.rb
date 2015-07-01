@@ -61,7 +61,7 @@ class BookmarkManager < Sinatra::Base
       redirect to('/')
       # If it's not valid, we'll show the same form again
     else
-      @message = "your password and confirmation passwords do not match"
+      @message = "Sorry, your passwords do not match"
       erb :'users/new'
     end
   end
