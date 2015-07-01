@@ -55,8 +55,15 @@ class BookmarkManager < Sinatra::Base
 
   post '/users' do
     user = User.create(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
-    session[:user_id] = user.id
-    redirect to('/')
+
+    if user.save #save returns true/false depending on whether the model is successfully saved to the database. (NB The model doesn't save if the password validation fails.)
+      session[:user_id] = user.id
+      redirect to('/')
+      # If it's not valid, we'll show the same form again
+    else
+      @message = "your password and confirmation passwords do not match"
+      erb :'users/new'
+    end
   end
 
   helpers do

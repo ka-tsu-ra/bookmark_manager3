@@ -15,8 +15,6 @@ class User
   # http://datamapper.org/docs/validations.html
   validates_confirmation_of :password
 
-
-
   property :id, Serial
   property :email, String
 
