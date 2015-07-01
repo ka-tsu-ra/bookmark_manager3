@@ -6,7 +6,7 @@ class BookmarkManager < Sinatra::Base
 
   enable :sessions
   set :session_secret, 'super secret'
-  
+
   get '/' do
     redirect '/links'
   end
@@ -51,5 +51,11 @@ class BookmarkManager < Sinatra::Base
   post '/users' do
     User.create(email: params[:email], password: params[:password])
     redirect to('/links')
+  end
+
+  post '/users' do
+    user = User.create(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
+    redirect to ('/')
   end
 end
