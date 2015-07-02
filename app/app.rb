@@ -95,11 +95,10 @@ class BookmarkManager < Sinatra::Base
     erb :'users/password_reset'
   end
 
-  # post '/password_reset' do
-  #   user = User.first(email: params[:email])
-  #
-  #   redirect to ('/password_token')
-  # end
+  post '/password_reset' do
+    User.reset_password(params[:email])
+    erb :'users/password_reset'
+  end
   #
   # get '/password_token' do
   #   "Check your emails"

@@ -39,7 +39,7 @@ class User
 
   def self.reset_password(email)
     user = first(email: email) # find the record of the user that's recovering the password
-    user.password_token = "ASDADADS"
+    user.update(:password_token => "ASDADADS")
     user.save
   end
 
