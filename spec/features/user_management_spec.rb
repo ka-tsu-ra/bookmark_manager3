@@ -1,12 +1,11 @@
 feature 'User sign up' do
 
   let(:user) do
-    create(:user)
+    build(:user)
   end
-  # Now can use user as a
 
   scenario 'I can sign up as a new user' do
-    expect { sign_up(user)}.to change(User, :count).by(1)
+    expect { sign_up(user) }.to change(User, :count).by(1)
     expect(page).to have_content("Welcome, #{user.email}")
     expect(User.first.email).to eq("#{user.email}")
   end
@@ -27,16 +26,16 @@ feature 'User sign up' do
     expect(page).to have_content('Please refer to the following errors below:')
   end
 
-  def sign_up(user)
-  # sign_up(email: 'alice@example.com',
-  #             password: '12345678',
-  #             password_confirmation: '12345678')
-    visit '/users/new'
-    fill_in :email, with: user.email
-    fill_in :password, with: user.password
-    fill_in :password_confirmation, with: user.password_confirmation
-    click_button 'Sign up'
-  end
+  # def sign_up(user)
+  # # sign_up(email: 'alice@example.com',
+  # #             password: '12345678',
+  # #             password_confirmation: '12345678')
+  #   visit '/users/new'
+  #   fill_in :email, with: user.email
+  #   fill_in :password, with: user.password
+  #   fill_in :password_confirmation, with: user.password_confirmation
+  #   click_button 'Sign up'
+  # end
 
   scenario 'with an email that is already registered' do
     sign_up(user)

@@ -20,4 +20,4 @@ require './app/models/user'
 
 DataMapper.finalize # finalizes models
 
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!

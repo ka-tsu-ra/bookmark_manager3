@@ -14,7 +14,7 @@
         <input type='submit' value='Sign out'>
       </form>
     <% end %>
-    <%= yield %>
+
     <% if flash[:errors] && !flash[:errors].empty? %>
       Please refer to the following errors below:
         <ul id='errors'>
@@ -28,5 +28,7 @@
           <%= flash[:notice] %>
         </div>
       <% end %>
+
+    <%= yield %>
   </body>
 </html>

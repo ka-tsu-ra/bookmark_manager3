@@ -48,6 +48,8 @@ class BookmarkManager < Sinatra::Base
     @links = tag ? tag.links : []
     erb :'links/index'
   end
+# require 'bye_bug'
+# bye_bug
 
   get '/users/new' do
     @user = User.new
@@ -97,7 +99,7 @@ class BookmarkManager < Sinatra::Base
 
   helpers do
     def current_user
-      @user||=User.get session[:user_id] if session[:user_id]
+      @current_user||=User.get session[:user_id]
     end
   end
 end
