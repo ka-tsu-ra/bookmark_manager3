@@ -7,3 +7,5 @@ FactoryGirl.define do
   end
 
 end
+
+# NOW IN TESTS TO REFER TO THIS USER, WRITE :USER

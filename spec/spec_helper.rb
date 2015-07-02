@@ -9,6 +9,7 @@ require 'tilt/erb'
 
 require './app/data_mapper_setup'
 require_relative './factories/user' # requires it in every test file
+require_relative './helpers/session'
 
 Capybara.app = BookmarkManager
 
@@ -31,7 +32,8 @@ Capybara.app = BookmarkManager
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-
+  # 
+  # config.include SessionHelpers
   config.include FactoryGirl::Syntax::Methods
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
