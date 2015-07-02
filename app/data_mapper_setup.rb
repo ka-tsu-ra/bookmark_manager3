@@ -8,7 +8,9 @@ require 'dm-validations'
 
 # DataMapper.setup(:default, "postgres://localhost/bookmark_manager") # tells DataMapper where the databse is on your machine
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://localhost/bookmark_manager#{env}')
+# DataMapper::Logger.new($stdout, :debug)
+
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/bookmark_manager_#{env}")
 
 require './app/models/link' # get application code that will use DM
 # require './app/link'
@@ -18,4 +20,4 @@ require './app/models/user'
 
 DataMapper.finalize # finalizes models
 
-DataMapper.auto_upgrade!
+DataMapper.auto_migrate!

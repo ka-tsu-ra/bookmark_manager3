@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 # require 'data_mapper'
-# require 'data_mapper_setup'
+# require './app/data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
   use Rack::MethodOverride
@@ -84,7 +84,7 @@ class BookmarkManager < Sinatra::Base
       session[:user_id] = user.id
       redirect to('/links')
     else
-      flash[:erros] = 'The email or password is incorrect'
+      flash.now[:errors] = ['The email or password is incorrect']
       erb :'sessions/new'
     end
   end
@@ -97,7 +97,7 @@ class BookmarkManager < Sinatra::Base
 
   helpers do
     def current_user
-      @user||=User.get session[:user_id]
+      @user||=User.get session[:user_id] if session[:user_id]
     end
   end
 end
