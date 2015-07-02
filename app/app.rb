@@ -97,6 +97,10 @@ class BookmarkManager < Sinatra::Base
     redirect '/'
   end
 
+  get '/password_reset' do
+    erb :'password/password_reset'
+  end
+
   helpers do
     def current_user
       @current_user||=User.get session[:user_id]
