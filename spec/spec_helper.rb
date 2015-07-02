@@ -5,6 +5,7 @@ require File.join(File.dirname(__FILE__), '..', 'app/app.rb')
 require 'capybara/rspec'
 require 'database_cleaner'
 require 'factory_girl'
+require 'tilt/erb'
 
 require './app/data_mapper_setup'
 require_relative './factories/user' # requires it in every test file

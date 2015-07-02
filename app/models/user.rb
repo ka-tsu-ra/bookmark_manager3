@@ -1,5 +1,6 @@
 require 'bcrypt'
 
+
 class User
 
   include DataMapper::Resource
@@ -23,6 +24,16 @@ class User
   def password=(password)
     @password = password  # without this the password attribute would always be nil.
     self.password_digest = BCrypt::Password.create(password)
+  end
+
+
+  def self.authenticate(email:, password:)
+    user = first(email: email)  # FINDS FIRST ENTRY IN USER TABLE THAT HAS EMAIL MATCHING THE EMAIL PARAMETER PASSED IN IN THIS METHOD.
+    if user && BCrypt::Password.new(user.password_digest) == password
+      user
+    else
+      nil
+    end
   end
 
 end
