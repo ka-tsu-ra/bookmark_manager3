@@ -7,6 +7,12 @@
   <body>
     <% if current_user %>
       Welcome, <%= current_user.email %>
+      <form action='/sessions' method='post'>
+        <input type='hidden' name='_method' value='delete'>
+        <!-- NB the _method field is hidden. Convention for a url that destroys a resource is sending a DELETE request to /resource_url. but browsers can only send GET and POSTs. Common solution in Sinatra and Rails is including a hidden _method field that overrides the actual type of request.
+        When Sinatra receives this request it will behave as if it was a DELETE request rather than POST. Therefore the handler for this form needs to specify 'delete' as an HTTP verb.-->
+        <input type='submit' value='Sign out'>
+      </form>
     <% end %>
     <%= yield %>
     <% if flash[:errors] && !flash[:errors].empty? %>
@@ -16,6 +22,11 @@
             <li><%= error %></li>
           <% end %>
         </ul>
+      <% end %>
+      <% if flash[:notice] %>
+        <div id='notice'>
+          <%= flash[:notice] %>
+        </div>
       <% end %>
   </body>
 </html>

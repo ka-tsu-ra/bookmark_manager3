@@ -4,6 +4,8 @@ require 'sinatra/flash'
 # require 'data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
+  use Rack::MethodOverride
+  # this is for the DELETE/hidden _method field in sign out stuff. To overcome browsers' inability to send a DELETE request.
 
   enable :sessions
   register Sinatra::Flash
@@ -82,9 +84,15 @@ class BookmarkManager < Sinatra::Base
       session[:user_id] = user.id
       redirect to('/links')
     else
-      flash[:erros] = ['The email or password is incorrect']
+      flash[:erros] = 'The email or password is incorrect'
       erb :'sessions/new'
     end
+  end
+
+  delete '/sessions' do
+    flash[:notice] = 'goodbye!'
+    session[:user_id] = nil
+    redirect '/'
   end
 
   helpers do
