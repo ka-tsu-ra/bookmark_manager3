@@ -20,6 +20,7 @@ class User
   property :email, String, unique: true, message: 'This email is already taken'
 
   property :password_digest, Text
+  property :password_token, Text
 
   def password=(password)
     @password = password  # without this the password attribute would always be nil.
@@ -34,6 +35,16 @@ class User
     else
       nil
     end
+  end
+
+  def self.reset_password(email)
+    user = first(email: email) # find the record of the user that's recovering the password
+    user.password_token = "ASDADADS"
+    user.save
+  end
+
+  def token=(token)
+    @password_token = token
   end
 
 end

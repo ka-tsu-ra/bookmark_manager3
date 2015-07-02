@@ -27,19 +27,13 @@ class BookmarkManager < Sinatra::Base
 
   post '/links' do
     link = Link.new(url: params[:url], title: params[:title]) # 1. Create a link
-
     tags = params[:tag].split
-
     tags.each do |tag|
       link.tags << Tag.create(name: tag)
     end
     # 3. Adding the tag to the link's DataMapper collection.
-
     # p link.tags
-
     link.save # 4. Saving the link.
-
-
     redirect to('/links')
   end
 
@@ -98,7 +92,17 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/password_reset' do
-    erb :'password/password_reset'
+    erb :'users/password_reset'
+  end
+
+  post '/password_reset' do
+    user = User.first(email: params[:email])
+    
+    redirect to ('/password_token')
+  end
+
+  get '/password_token' do
+    "Check your emails"
   end
 
   helpers do
@@ -106,4 +110,5 @@ class BookmarkManager < Sinatra::Base
       @current_user||=User.get session[:user_id]
     end
   end
+
 end
